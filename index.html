@@ -2,67 +2,128 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mural – Investigação</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-<h1>Mural – Investigação</h1>
+    <h1>Mural – Investigação <i class="fas fa-search"></i></h1>
 
-<div class="board">
+    <div class="board" id="investigationBoard">
 
-    <!-- GRUPO -->
-    <div class="card" id="grupo">
-        <h3>Grupo</h3>
-        <p>Estavam no show. Nem todos aparecem no vídeo.</p>
+        <!-- Cards de suspeitos -->
+        <div class="card" id="grupo">
+            <div class="card-header">
+                <h3>Grupo</h3>
+                <button class="card-btn" data-target="grupo"><i class="fas fa-expand"></i></button>
+            </div>
+            <p>Estavam no show. Nem todos aparecem no vídeo.</p>
+            <div class="card-tags">
+                <span class="tag">Presente</span>
+                <span class="tag">Vídeo</span>
+            </div>
+        </div>
+
+        <div class="card" id="jheny">
+            <div class="card-header">
+                <h3>Jheny <span class="subtitle">filha do pastor</span></h3>
+                <button class="card-btn" data-target="jheny"><i class="fas fa-expand"></i></button>
+            </div>
+            <p>Sabia previamente que vocês iriam ao show. Se afastou recentemente.</p>
+            <div class="card-tags">
+                <span class="tag suspect">Informação prévia</span>
+            </div>
+        </div>
+
+        <div class="card" id="mauricio">
+            <div class="card-header">
+                <h3>Maurício</h3>
+                <button class="card-btn" data-target="mauricio"><i class="fas fa-expand"></i></button>
+            </div>
+            <p>Líder. Já teve conflitos com o grupo.</p>
+            <div class="card-tags">
+                <span class="tag leader">Líder</span>
+                <span class="tag conflict">Conflitos</span>
+            </div>
+        </div>
+
+        <div class="card" id="rosa">
+            <div class="card-header">
+                <h3>Rosa</h3>
+                <button class="card-btn" data-target="rosa"><i class="fas fa-expand"></i></button>
+            </div>
+            <p>Líder. Sempre busca parecer que está "tudo sob controle".</p>
+            <div class="card-tags">
+                <span class="tag leader">Líder</span>
+                <span class="tag control">Controle</span>
+            </div>
+        </div>
+
+        <div class="card" id="sede">
+            <div class="card-header">
+                <h3>Pessoal da Sede</h3>
+                <button class="card-btn" data-target="sede"><i class="fas fa-expand"></i></button>
+            </div>
+            <p>Possível origem da fofoca.</p>
+            <div class="card-tags">
+                <span class="tag rumor">Fofoca</span>
+                <span class="tag suspect">Origem</span>
+            </div>
+        </div>
+
+        <div class="card" id="pastorLocal">
+            <div class="card-header">
+                <h3>Pastor Local</h3>
+                <button class="card-btn" data-target="pastorLocal"><i class="fas fa-expand"></i></button>
+            </div>
+            <p>Já mentiu outras vezes. Disse que "chegou ao presidente".</p>
+            <div class="card-tags">
+                <span class="tag liar">Mentiu antes</span>
+                <span class="tag connection">Conexão alta</span>
+            </div>
+        </div>
+
+        <div class="card" id="pastorPresidente">
+            <div class="card-header">
+                <h3>Pastor Presidente</h3>
+                <button class="card-btn" data-target="pastorPresidente"><i class="fas fa-expand"></i></button>
+            </div>
+            <p>Não conhece vocês. Dúvida se realmente soube disso.</p>
+            <div class="card-tags">
+                <span class="tag unknown">Desconhecido</span>
+                <span class="tag doubt">Dúvida</span>
+            </div>
+        </div>
+
+        <!-- Modal para detalhes -->
+        <div id="cardModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modalTitle"></h2>
+                <p id="modalDescription"></p>
+                <div id="modalTags"></div>
+                <div class="modal-connections">
+                    <h3>Conexões:</h3>
+                    <ul id="modalConnections"></ul>
+                </div>
+                <div class="modal-notes">
+                    <h3>Anotações:</h3>
+                    <textarea id="noteInput" placeholder="Adicione suas anotações aqui..."></textarea>
+                    <button id="saveNote">Salvar Anotação</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controles -->
+        <div class="controls">
+            <button id="toggleLines" class="control-btn"><i class="fas fa-project-diagram"></i> Mostrar/Esconder Linhas</button>
+            <button id="resetView" class="control-btn"><i class="fas fa-sync-alt"></i> Resetar Visualização</button>
+            <button id="addNote" class="control-btn"><i class="fas fa-sticky-note"></i> Nova Anotação Geral</button>
+        </div>
     </div>
 
-    <!-- JHENY – filha do pastor -->
-    <div class="card" id="jheny">
-        <h3>Jheny</h3>
-        <p>Sabia previamente que vocês iriam ao show.<br>Se afastou recentemente.</p>
-    </div>
-
-    <!-- MAURÍCIO -->
-    <div class="card" id="mauricio">
-        <h3>Maurício</h3>
-        <p>Líder. Já teve conflitos com o grupo.</p>
-    </div>
-
-    <!-- ROSA -->
-    <div class="card" id="rosa">
-        <h3>Rosa</h3>
-        <p>Líder. Sempre busca parecer que está “tudo sob controle”.</p>
-    </div>
-
-    <!-- PESSOAL DA SEDE -->
-    <div class="card" id="sede">
-        <h3>Pessoal da Sede</h3>
-        <p>Possível origem da fofoca.</p>
-    </div>
-
-    <!-- PASTOR LOCAL -->
-    <div class="card" id="pastorLocal">
-        <h3>Pastor Local</h3>
-        <p>Já mentiu outras vezes.<br>Disse que “chegou ao presidente”.</p>
-    </div>
-
-    <!-- PASTOR PRESIDENTE -->
-    <div class="card" id="pastorPresidente">
-        <h3>Pastor Presidente</h3>
-        <p>Não conhece vocês.<br>Dúvida se realmente soube disso.</p>
-    </div>
-
-    <!-- LINHAS -->
-    <div class="line l1"></div>
-    <div class="line l2"></div>
-    <div class="line l3"></div>
-    <div class="line l4"></div>
-    <div class="line l5"></div>
-    <div class="line l6"></div>
-    <div class="line l7"></div>
-
-</div>
-
+    <script src="script.js"></script>
 </body>
 </html>
