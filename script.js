@@ -1,54 +1,93 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Investigacao {
+class Pessoa {
+    String nome;
+    String descricao;
+    List<Pessoa> conexoes = new ArrayList<>();
 
-    static class Pessoa {
-        String nome;
-        List<Pessoa> possiveisFontes = new ArrayList<>();
-
-        Pessoa(String nome) {
-            this.nome = nome;
-        }
-
-        void addFonte(Pessoa p) {
-            possiveisFontes.add(p);
-        }
-
-        void mostrarFontes() {
-            System.out.println("Fontes possíveis sobre " + nome + ":");
-            if (possiveisFontes.isEmpty()) {
-                System.out.println("  Nenhuma fonte conhecida.");
-                return;
-            }
-            possiveisFontes.forEach(f -> System.out.println("  -> " + f.nome));
-        }
+    public Pessoa(String nome, String descricao) {
+        this.nome = nome;
+        this.descricao = descricao;
     }
 
+    public void conectar(Pessoa p) {
+        conexoes.add(p);
+    }
+
+    @Override
+    public String toString() {
+        return nome + " — " + descricao;
+    }
+}
+
+public class MuralInvestigacao {
     public static void main(String[] args) {
 
-        Pessoa voces = new Pessoa("Vocês");
-        Pessoa filhaPastor = new Pessoa("Filha do Pastor");
-        Pessoa sede = new Pessoa("Pessoal da Sede");
-        Pessoa pastorLocal = new Pessoa("Pastor Local");
-        Pessoa pastorPresidente = new Pessoa("Pastor Presidente");
+        // Criando as pessoas (suspeitos / envolvidos)
+        Pessoa jheny = new Pessoa(
+            "Jheny (Filha do Pastor)",
+            "Sabia previamente que vocês iriam ao show."
+        );
 
-        // ligações reais
-        filhaPastor.addFonte(voces);
-        sede.addFonte(filhaPastor);
+        Pessoa sede = new Pessoa(
+            "Pessoal da Sede",
+            "Possível fonte da fofoca."
+        );
 
-        // possibilidade de fofoca
-        pastorLocal.addFonte(sede);
+        Pessoa grupo = new Pessoa(
+            "Grupo",
+            "Estavam no show. Nem todos apareceram no vídeo."
+        );
 
-        // ligação duvidosa (pastor local pode ter mentido)
-        pastorPresidente.addFonte(pastorLocal);
+        Pessoa pastorLocal = new Pessoa(
+            "Pastor Local",
+            "Já mentiu outras vezes. Disse que 'chegou ao presidente'."
+        );
 
-        // exibir relações
-        voces.mostrarFontes();
-        filhaPastor.mostrarFontes();
-        sede.mostrarFontes();
-        pastorLocal.mostrarFontes();
+        Pessoa pastorPresidente = new Pessoa(
+            "Pastor Presidente",
+            "Não conhece vocês. Duvidoso que tenha falado algo."
+        );
 
-        System.out.println("\n*** Ligação com presidente é incerta ***");
-        pastorPresidente.mostrarFontes();
+        Pessoa mauricio = new Pessoa(
+            "Maurício",
+            "Estava no culto e comentou sobre o assunto."
+        );
+
+        Pessoa rosa = new Pessoa(
+            "Rosa",
+            "Pode ter sido informada por alguém da sede."
+        );
+
+        // Criando conexões (setas do mural)
+        jheny.conectar(sede);
+        sede.conectar(pastorLocal);
+        grupo.conectar(pastorLocal);
+        pastorLocal.conectar(pastorPresidente);
+        sede.conectar(rosa);
+        sede.conectar(mauricio);
+
+        // Exibir mapa
+        System.out.println("===== MAPA DE INVESTIGAÇÃO =====\n");
+
+        exibirPessoa(jheny);
+        exibirPessoa(sede);
+        exibirPessoa(grupo);
+        exibirPessoa(pastorLocal);
+        exibirPessoa(pastorPresidente);
+        exibirPessoa(mauricio);
+        exibirPessoa(rosa);
+    }
+
+    public static void exibirPessoa(Pessoa p) {
+        System.out.println(p);
+        if (!p.conexoes.isEmpty()) {
+            System.out.println("  -> Conectado a:");
+            for (Pessoa conexao : p.conexoes) {
+                System.out.println("     - " + conexao.nome);
+            }
+        }
+        System.out.println();
     }
 }
