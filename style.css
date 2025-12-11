@@ -1,1 +1,70 @@
+body {
+    background: #e8dfc3;
+    font-family: Arial, sans-serif;
+}
 
+h1 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.board {
+    width: 95%;
+    height: 600px;
+    background: #f4e8c9;
+    border: 8px solid #5c3b1e;
+    margin: auto;
+    position: relative;
+    border-radius: 12px;
+}
+
+.card {
+    width: 200px;
+    padding: 10px;
+    background: white;
+    border: 3px solid black;
+    border-radius: 8px;
+    position: absolute;
+}
+
+#voce { top: 400px; left: 50px; }
+#filhaPastor { top: 60px; left: 300px; }
+#sede { top: 60px; left: 650px; }
+#pastorLocal { top: 400px; left: 300px; }
+#pastorPresidente { top: 400px; left: 650px; }
+
+/* LINHAS */
+
+.line {
+    position: absolute;
+    background: black;
+    height: 3px;
+    transform-origin: 0 0;
+}
+
+/* VOCÊS → JHENY */
+.l1 {
+    top: 420px; left: 250px; width: 150px;
+    transform: rotate(-60deg);
+}
+
+/* JHENY → SEDE */
+.l2 {
+    top: 130px; left: 500px; width: 150px;
+}
+
+/* SEDE → PASTOR PRESIDENTE */
+.l3 {
+    top: 140px; left: 740px; width: 3px; height: 260px;
+}
+
+/* VOCÊS → PASTOR LOCAL */
+.l4 {
+    top: 450px; left: 250px; width: 150px;
+}
+
+/* PASTOR LOCAL → PASTOR PRESIDENTE (duvidoso) */
+.l5 {
+    top: 450px; left: 500px; width: 150px;
+    border: 3px dashed black;
+}
